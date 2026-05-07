@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSnet — Know Your Impact</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75,600&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ─── CSS Variables ─── */
+  :root {
+    --impact-orange: #FFAD2F;
+    --canvas-cream: #F7F2EE;
+    --accent-pink: #FFA1F7;
+    --driving-magenta: #FB4D86;
+    --creative-lavender: #A864FC;
+    --deep-green: #01924E;
+    --curious-blue: #2A77FF;
+    --soft-black: #312D2B;
+    --white: #ffffff;
+
+    --font-display: 'Bricolage Grotesque', sans-serif;
+    --font-body: 'Public Sans', sans-serif;
+
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 32px;
+    --radius-full: 999px;
+  }
+
+  /* ─── Reset ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--canvas-cream);
+    color: var(--soft-black);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; }
+  a { text-decoration: none; color: inherit; }
+
+  /* ─── Nav ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(247,242,238,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(49,45,43,0.08);
+    transition: padding 0.3s ease;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--soft-black);
+    letter-spacing: -0.01em;
+  }
+  .nav-logo-mark {
+    width: 36px;
+    height: 36px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .nav-logo-mark svg { width: 100%; height: 100%; }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--soft-black);
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav-links a.active { opacity: 1; font-weight: 600; }
+  .nav-cta {
+    background: var(--soft-black);
+    color: var(--white) !important;
+    opacity: 1 !important;
+    padding: 10px 22px;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 15px;
+    transition: background 0.2s, transform 0.15s !important;
+  }
+  .nav-cta:hover { background: var(--driving-magenta) !important; transform: translateY(-1px); }
+
+  /* ─── Hero ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+    gap: 60px;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  /* Gradient ribbon blob — top right */
+  .hero-blob {
+    position: absolute;
+    top: -80px;
+    right: -120px;
+    width: 680px;
+    height: 680px;
+    opacity: 0.85;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 620px;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--soft-black);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.1s ease forwards;
+  }
+  .hero-eyebrow-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--impact-orange);
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(52px, 6vw, 88px);
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    color: var(--soft-black);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s ease forwards;
+  }
+  .hero h1 span {
+    background: linear-gradient(135deg, var(--driving-magenta), var(--impact-orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--soft-black);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.35s ease forwards;
+    max-width: 480px;
+    margin-bottom: 40px;
+  }
+  .hero-sub strong { font-weight: 600; }
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s ease forwards;
+  }
+  .btn-primary {
+    background: var(--soft-black);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: var(--radius-full);
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-primary:hover { background: var(--driving-magenta); transform: translateY(-2px); }
+  .btn-secondary {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--soft-black);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.7;
+    transition: opacity 0.2s, gap 0.2s;
+  }
+  .btn-secondary:hover { opacity: 1; gap: 12px; }
+  .btn-arrow { font-size: 18px; }
+
+  /* Hero visual side */
+  .hero-visual {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    opacity: 0;
+    animation: fadeIn 1s 0.6s ease forwards;
+  }
+  .hero-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .stat-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .stat-card:nth-child(1)::before { background: linear-gradient(90deg, var(--deep-green), var(--curious-blue)); }
+  .stat-card:nth-child(2)::before { background: linear-gradient(90deg, var(--driving-magenta), var(--accent-pink)); }
+  .stat-card:nth-child(3)::before { background: linear-gradient(90deg, var(--impact-orange), var(--driving-magenta)); }
+  .stat-card:nth-child(4)::before { background: linear-gradient(90deg, var(--creative-lavender), var(--curious-blue)); }
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--soft-black);
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--soft-black);
+    opacity: 0.55;
+    line-height: 1.4;
+  }
+  .hero-trust-badge {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .bcorp-badge {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--deep-green), var(--curious-blue));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .trust-text { font-size: 13px; font-weight: 500; line-height: 1.4; opacity: 0.7; }
+  .trust-text strong { opacity: 1; color: var(--soft-black); }
+
+  /* ─── Section shared ─── */
+  section { padding: 100px 48px; }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--soft-black);
+    opacity: 0.45;
+    margin-bottom: 20px;
+  }
+  .section-label::before {
+    content: '';
+    width: 20px; height: 2px;
+    background: var(--driving-magenta);
+    border-radius: 2px;
+  }
+  h2.display {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 5vw, 68px);
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    color: var(--soft-black);
+    margin-bottom: 20px;
+  }
+  h3.display {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--soft-black);
+    margin-bottom: 16px;
+  }
+  .body-lg {
+    font-size: 18px;
+    line-height: 1.65;
+    font-weight: 400;
+    opacity: 0.75;
+    max-width: 560px;
+  }
+
+  /* ─── Why section ─── */
+  .why-section {
+    background: var(--soft-black);
+    color: var(--white);
+    padding: 100px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .why-section .section-label { color: var(--white); opacity: 0.4; }
+  .why-section .section-label::before { background: var(--impact-orange); }
+  .why-section h2.display { color: var(--white); }
+  .why-section .body-lg { color: var(--white); opacity: 0.65; }
+  .why-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .why-right { padding-top: 20px; }
+  .why-blob {
+    position: absolute;
+    right: -200px;
+    top: -100px;
+    width: 600px;
+    height: 600px;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+  .why-pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 40px;
+  }
+  .pillar {
+    display: flex;
+    gap: 20px;
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    align-items: flex-start;
+  }
+  .pillar:first-child { border-top: 1px solid rgba(255,255,255,0.1); }
+  .pillar-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .pillar-icon.orange { background: rgba(255,173,47,0.15); }
+  .pillar-icon.magenta { background: rgba(251,77,134,0.15); }
+  .pillar-icon.green { background: rgba(1,146,78,0.15); }
+  .pillar-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .pillar-body {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.55);
+  }
+
+  /* ─── Data section ─── */
+  .data-section {
+    background: var(--canvas-cream);
+    padding: 100px 48px;
+  }
+  .data-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .data-features {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 36px;
+  }
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 20px;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    transition: transform 0.2s;
+  }
+  .feature-item:hover { transform: translateX(6px); }
+  .feature-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--driving-magenta);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+  .feature-text { font-size: 15px; font-weight: 500; line-height: 1.5; }
+
+  /* Data visual */
+  .data-visual {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .data-visual-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+  .data-visual-title { font-size: 14px; font-weight: 600; opacity: 0.5; }
+  .data-visual-live {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 600;
+    color: var(--deep-green);
+  }
+  .live-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--deep-green);
+    animation: pulse 2s infinite;
+  }
+  .data-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    height: 140px;
+    margin-bottom: 20px;
+  }
+  .bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .bar {
+    width: 100%;
+    border-radius: 6px 6px 0 0;
+    transition: height 0.3s ease;
+  }
+  .bar-label { font-size: 11px; opacity: 0.4; font-weight: 500; }
+  .data-metric-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(49,45,43,0.08);
+  }
+  .data-metric { text-align: center; }
+  .data-metric-val {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--soft-black);
+  }
+  .data-metric-key { font-size: 11px; opacity: 0.45; font-weight: 500; margin-top: 2px; }
+
+  /* ─── Configurable section ─── */
+  .config-section {
+    padding: 100px 48px;
+    background: var(--canvas-cream);
+    position: relative;
+    overflow: hidden;
+  }
+  .config-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .config-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .config-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .config-card:hover { transform: translateY(-4px); }
+  .config-card-accent {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .config-card h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--soft-black);
+  }
+  .config-card p {
+    font-size: 13px;
+    line-height: 1.55;
+    opacity: 0.55;
+  }
+  .config-card.wide {
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .config-card.wide .config-card-accent { flex-shrink: 0; margin-bottom: 0; }
+  .config-card.wide div { flex: 1; }
+
+  /* ─── Who uses section ─── */
+  .who-section {
+    padding: 100px 48px;
+    background: var(--canvas-cream);
+  }
+  .who-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: end;
+    margin-bottom: 60px;
+  }
+  .who-uses-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .who-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 36px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .who-card:hover { transform: translateY(-4px); }
+  .who-card-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+  }
+  .who-card:nth-child(1) .who-card-bar { background: linear-gradient(90deg, var(--deep-green), var(--curious-blue)); }
+  .who-card:nth-child(2) .who-card-bar { background: linear-gradient(90deg, var(--driving-magenta), var(--accent-pink)); }
+  .who-card:nth-child(3) .who-card-bar { background: linear-gradient(90deg, var(--impact-orange), var(--driving-magenta)); }
+  .who-card-role {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--soft-black);
+    opacity: 0.4;
+    margin-bottom: 16px;
+  }
+  .who-card h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 14px;
+    color: var(--soft-black);
+  }
+  .who-card p {
+    font-size: 14px;
+    line-height: 1.65;
+    opacity: 0.6;
+    margin-bottom: 24px;
+  }
+  .who-card-cta {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--soft-black);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.6;
+    transition: opacity 0.2s, gap 0.2s;
+  }
+  .who-card:hover .who-card-cta { opacity: 1; gap: 10px; }
+
+  /* ─── Numbers / social proof section ─── */
+  .numbers-section {
+    padding: 0 48px 100px;
+    background: var(--canvas-cream);
+  }
+  .numbers-inner {
+    background: linear-gradient(135deg, var(--deep-green) 0%, var(--curious-blue) 50%, var(--creative-lavender) 100%);
+    border-radius: var(--radius-lg);
+    padding: 72px 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .numbers-left h2.display { color: var(--white); }
+  .numbers-left .body-lg { color: rgba(255,255,255,0.7); max-width: 420px; margin-top: 16px; }
+  .numbers-blob {
+    position: absolute;
+    right: -100px; bottom: -100px;
+    width: 400px; height: 400px;
+    opacity: 0.15;
+    pointer-events: none;
+  }
+  .numbers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: rgba(255,255,255,0.15);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .number-cell {
+    background: rgba(255,255,255,0.08);
+    padding: 32px 28px;
+    text-align: center;
+    backdrop-filter: blur(4px);
+    transition: background 0.2s;
+  }
+  .number-cell:hover { background: rgba(255,255,255,0.15); }
+  .number-val {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .number-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* ─── CTA section ─── */
+  .cta-section {
+    padding: 100px 48px;
+    background: var(--canvas-cream);
+    text-align: center;
+  }
+  .cta-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .cta-section h2.display { text-align: center; margin-bottom: 20px; }
+  .cta-section .body-lg { text-align: center; margin: 0 auto 40px; max-width: 480px; }
+  .cta-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .btn-outline {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--soft-black);
+    border: 2px solid var(--soft-black);
+    padding: 13px 26px;
+    border-radius: var(--radius-full);
+    transition: background 0.2s, color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-outline:hover { background: var(--soft-black); color: var(--white); }
+
+  /* ─── Footer ─── */
+  footer {
+    background: var(--soft-black);
+    color: var(--white);
+    padding: 60px 48px 36px;
+  }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+  .footer-brand-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+    color: var(--white);
+  }
+  .footer-tagline {
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0.5;
+    max-width: 260px;
+  }
+  .footer-col h5 {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.4;
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-col ul li a {
+    font-size: 14px;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+    font-weight: 500;
+  }
+  .footer-col ul li a:hover { opacity: 1; }
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 36px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 13px;
+    opacity: 0.4;
+  }
+  .footer-bcorp {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.5;
+  }
+  .footer-bcorp-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 10px;
+    color: white;
+  }
+
+  /* ─── Animations ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.8); }
+  }
+  @keyframes ribbonFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50%       { transform: translateY(-20px) rotate(3deg); }
+  }
+  .hero-blob { animation: ribbonFloat 8s ease-in-out infinite; }
+
+  /* ─── Scroll reveal ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; min-height: auto; }
+    .hero-visual { display: none; }
+    section { padding: 60px 24px; }
+    .why-inner, .data-inner, .config-inner, .who-header { grid-template-columns: 1fr; gap: 40px; }
+    .numbers-section { padding: 0 24px 60px; }
+    .numbers-inner { grid-template-columns: 1fr; padding: 48px 32px; }
+    .who-uses-grid { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .config-cards { grid-template-columns: 1fr; }
+    .config-card.wide { grid-column: span 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-mark">
+      <!-- CSnet logo mark SVG approximation -->
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="logoGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#01924E"/>
+            <stop offset="40%" stop-color="#FFAD2F"/>
+            <stop offset="100%" stop-color="#FB4D86"/>
+          </linearGradient>
+        </defs>
+        <path d="M6 32 C6 32 10 20 18 14 C22 11 26 14 24 20 C22 26 16 24 20 18 C24 12 30 10 34 14" 
+              stroke="url(#logoGrad)" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+      </svg>
+    </div>
+    CSnet
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="#">Our Impact</a></li>
+    <li><a href="#">Resources</a></li>
+    <li><a href="#">Contact</a></li>
+    <li><a href="#" class="nav-cta">Get started</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <!-- Gradient ribbon blob -->
+  <div class="hero-bg">
+    <svg class="hero-blob" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="blobGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FB4D86"/>
+          <stop offset="50%" stop-color="#FFAD2F"/>
+          <stop offset="100%" stop-color="#FFA1F7"/>
+        </linearGradient>
+        <filter id="blur1"><feGaussianBlur stdDeviation="2"/></filter>
+      </defs>
+      <path d="M480 60 C520 40 560 80 540 130 C520 180 460 170 420 210 C380 250 400 310 360 340 C320 370 270 350 240 390 C210 430 230 490 190 510 C150 530 100 500 80 460 C60 420 80 370 110 340 C140 310 180 310 200 270 C220 230 200 170 230 140 C260 110 310 130 350 110 C390 90 420 60 480 60Z" 
+            fill="url(#blobGrad1)" filter="url(#blur1)" opacity="0.55"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-dot"></span>
+      Community service software
+    </div>
+    <h1>Know your <span>impact.</span> Tell the story that matters.</h1>
+    <p class="hero-sub">
+      CSnet is case management software built for the community service sector — 
+      <strong>by people who've worked in it.</strong> We help organisations connect 
+      day-to-day practice with the outcomes they're working towards.
+    </p>
+    <div class="hero-actions">
+      <a href="#" class="btn-primary">Get started <span class="btn-arrow">→</span></a>
+      <a href="#" class="btn-secondary">See how it works <span class="btn-arrow">→</span></a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">3,672</div>
+        <div class="stat-label">Active workers across Australia</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">1.2M+</div>
+        <div class="stat-label">Sessions of support recorded</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">115K+</div>
+        <div class="stat-label">Surveys & assessments completed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">126K+</div>
+        <div class="stat-label">Reports run by teams</div>
+      </div>
+    </div>
+    <div class="hero-trust-badge">
+      <div class="bcorp-badge">B</div>
+      <div class="trust-text">
+        <strong>Certified B Corporation since 2015</strong><br>
+        B Impact Score of 131.1 — built to serve people, not just profit.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHY CSNET EXISTS ─── -->
+<section class="why-section">
+  <svg class="why-blob" viewBox="0 0 500 500" fill="none">
+    <defs>
+      <linearGradient id="whyBlob" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FFAD2F"/>
+        <stop offset="100%" stop-color="#FB4D86"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="250" cy="250" rx="220" ry="200" fill="url(#whyBlob)"/>
+  </svg>
+  <div class="why-inner">
+    <div class="why-left">
+      <div class="section-label">Why CSnet exists</div>
+      <h2 class="display">We bridge the gap between practice and evidence.</h2>
+      <p class="body-lg" style="margin-top:20px;">
+        Community service work is complex. The people you support have layered needs, 
+        your programs span multiple teams, and funders want evidence — often in different 
+        formats, on different timelines.
+      </p>
+      <p class="body-lg" style="margin-top:16px;">
+        CSnet exists to make that manageable. Not by adding more administration, 
+        but by turning the work your team is already doing into data that means something.
+      </p>
+    </div>
+    <div class="why-right">
+      <div class="why-pillars">
+        <div class="pillar reveal">
+          <div class="pillar-icon orange">🎯</div>
+          <div>
+            <div class="pillar-title">Support your theory of change</div>
+            <div class="pillar-body">We help you see what's working, understand what's shifting, and make decisions grounded in what actually matters to the communities you serve.</div>
+          </div>
+        </div>
+        <div class="pillar reveal reveal-delay-1">
+          <div class="pillar-icon magenta">📊</div>
+          <div>
+            <div class="pillar-title">Deep sector knowledge built in</div>
+            <div class="pillar-body">CSnet was built by people who've worked alongside community organisations for over 15 years — listening, learning and evolving the platform to meet real needs.</div>
+          </div>
+        </div>
+        <div class="pillar reveal reveal-delay-2">
+          <div class="pillar-icon green">🤝</div>
+          <div>
+            <div class="pillar-title">We walk alongside you</div>
+            <div class="pillar-body">We're more than software. We configure, implement and support you in a way that reflects how your organisation actually works — not how a generic system expects you to.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ENTER DATA ONCE ─── -->
+<section class="data-section">
+  <div class="data-inner">
+    <div>
+      <div class="section-label reveal">One source of truth</div>
+      <h2 class="display reveal reveal-delay-1">Enter data once.<br>Use it everywhere.</h2>
+      <p class="body-lg reveal reveal-delay-2" style="margin-top:16px;">
+        CSnet gives you a single, secure source of truth for your client, program and 
+        outcomes data — so your team captures information once and it flows where it needs to go.
+      </p>
+      <div class="data-features reveal reveal-delay-3">
+        <div class="feature-item">
+          <div class="feature-dot"></div>
+          <div class="feature-text">Capture information once, at the point of practice</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-dot" style="background:var(--curious-blue)"></div>
+          <div class="feature-text">Connect data across programs, teams and time</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-dot" style="background:var(--impact-orange)"></div>
+          <div class="feature-text">Generate reports for funders, governance and management needs</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-dot" style="background:var(--deep-green)"></div>
+          <div class="feature-text">Tell one clear, evidence-based story to every audience</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Simple data dashboard illustration -->
+    <div class="data-visual reveal reveal-delay-2">
+      <div class="data-visual-header">
+        <div class="data-visual-title">Program outcomes overview</div>
+        <div class="data-visual-live"><span class="live-dot"></span> Live</div>
+      </div>
+      <div class="data-bars">
+        <div class="bar-group">
+          <div class="bar" style="height:60%; background:linear-gradient(180deg,#FB4D86,#FFAD2F);"></div>
+          <div class="bar-label">Q1</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar" style="height:75%; background:linear-gradient(180deg,#FB4D86,#FFAD2F);"></div>
+          <div class="bar-label">Q2</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar" style="height:55%; background:linear-gradient(180deg,#FB4D86,#FFAD2F);"></div>
+          <div class="bar-label">Q3</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar" style="height:90%; background:linear-gradient(180deg,#FB4D86,#FFAD2F);"></div>
+          <div class="bar-label">Q4</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar" style="height:45%; background:linear-gradient(180deg,#2A77FF,#01924E);"></div>
+          <div class="bar-label">Q1</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar" style="height:70%; background:linear-gradient(180deg,#2A77FF,#01924E);"></div>
+          <div class="bar-label">Q2</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar" style="height:82%; background:linear-gradient(180deg,#2A77FF,#01924E);"></div>
+          <div class="bar-label">Q3</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar" style="height:95%; background:linear-gradient(180deg,#2A77FF,#01924E);"></div>
+          <div class="bar-label">Q4</div>
+        </div>
+      </div>
+      <div class="data-metric-row">
+        <div class="data-metric">
+          <div class="data-metric-val">94%</div>
+          <div class="data-metric-key">Outcomes met</div>
+        </div>
+        <div class="data-metric">
+          <div class="data-metric-val">↑ 12%</div>
+          <div class="data-metric-key">YoY improvement</div>
+        </div>
+        <div class="data-metric">
+          <div class="data-metric-val">18</div>
+          <div class="data-metric-key">Programs active</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONFIGURABLE ─── -->
+<section class="config-section" style="background: var(--soft-black);">
+  <div class="config-inner">
+    <div>
+      <div class="section-label reveal" style="color:white; opacity:0.4;">Built around you</div>
+      <h2 class="display reveal reveal-delay-1" style="color:white;">Configurable to your organisation.</h2>
+      <p class="body-lg reveal reveal-delay-2" style="color:white; opacity:0.6; margin-top:16px;">
+        Every organisation is different. CSnet adapts to your programs, reporting frameworks and practice models — not the other way around. Your team keeps working the way it works.
+      </p>
+      <p class="body-lg reveal reveal-delay-3" style="color:white; opacity:0.6; margin-top:14px;">
+        Consistent data collection, without forcing teams to change how they work to fit a system.
+      </p>
+      <a href="#" class="btn-primary reveal reveal-delay-4" style="margin-top:36px; display:inline-flex; background:var(--impact-orange); color:var(--soft-black);">
+        See implementation process →
+      </a>
+    </div>
+
+    <div class="config-cards reveal reveal-delay-2">
+      <div class="config-card" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);">
+        <div class="config-card-accent" style="background:rgba(255,173,47,0.2);">🏗️</div>
+        <h4 style="color:white;">Program structure</h4>
+        <p style="color:rgba(255,255,255,0.5);">Configure programs, activity types and outcome frameworks to match your model.</p>
+      </div>
+      <div class="config-card" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);">
+        <div class="config-card-accent" style="background:rgba(251,77,134,0.2);">📋</div>
+        <h4 style="color:white;">Reporting frameworks</h4>
+        <p style="color:rgba(255,255,255,0.5);">Meet funder, government and governance requirements without extra work.</p>
+      </div>
+      <div class="config-card" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);">
+        <div class="config-card-accent" style="background:rgba(42,119,255,0.2);">🔗</div>
+        <h4 style="color:white;">System integration</h4>
+        <p style="color:rgba(255,255,255,0.5);">Connect with IRIS, DFFH and other external systems through built-in integrations.</p>
+      </div>
+      <div class="config-card" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);">
+        <div class="config-card-accent" style="background:rgba(1,146,78,0.2);">🛡️</div>
+        <h4 style="color:white;">Security & access</h4>
+        <p style="color:rgba(255,255,255,0.5);">User roles, permissions and data governance that reflect your organisation's needs.</p>
+      </div>
+      <div class="config-card wide" style="background:rgba(255,173,47,0.1); border:1px solid rgba(255,173,47,0.2);">
+        <div class="config-card-accent" style="background:rgba(255,173,47,0.2); margin-bottom:0;">✨</div>
+        <div>
+          <h4 style="color:white;">Data Hub & Power BI</h4>
+          <p style="color:rgba(255,255,255,0.5);">For organisations ready to go deeper — connect to a Power BI semantic model and build custom analytics on your own CSnet data.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHO USES CSNET ─── -->
+<section class="who-section">
+  <div class="who-header">
+    <div>
+      <div class="section-label reveal">Who CSnet is for</div>
+      <h2 class="display reveal reveal-delay-1">Whether you're leading strategy or leading a program.</h2>
+    </div>
+    <p class="body-lg reveal reveal-delay-2">
+      CSnet is used by community service organisations, program teams and leaders 
+      who need to connect practice, data and impact — in one place.
+    </p>
+  </div>
+  <div class="who-uses-grid">
+    <div class="who-card reveal">
+      <div class="who-card-bar"></div>
+      <div class="who-card-role">CEOs & Executive Leaders</div>
+      <h3>Champion change with confidence.</h3>
+      <p>CSnet gives you the full picture — connecting your organisation's data into one story you can take to the board, to funders, and to the communities you champion.</p>
+      <div class="who-card-cta">Learn more <span>→</span></div>
+    </div>
+    <div class="who-card reveal reveal-delay-1">
+      <div class="who-card-bar"></div>
+      <div class="who-card-role">Program Managers & Teams</div>
+      <h3>Know the difference you make.</h3>
+      <p>See patterns in your data, understand change over time, and make decisions grounded in what matters — with real-time insights that amplify your impact.</p>
+      <div class="who-card-cta">Learn more <span>→</span></div>
+    </div>
+    <div class="who-card reveal reveal-delay-2">
+      <div class="who-card-bar"></div>
+      <div class="who-card-role">Large & Multi-Program Organisations</div>
+      <h3>End-to-end evidence. One system.</h3>
+      <p>Connect programs, teams and reporting requirements across your whole organisation. One story told clearly, to every audience that needs to hear it.</p>
+      <div class="who-card-cta">Learn more <span>→</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── NUMBERS ─── -->
+<section class="numbers-section">
+  <div class="numbers-inner">
+    <div class="numbers-left reveal">
+      <div class="section-label" style="color:white; opacity:0.5;">The difference, in numbers</div>
+      <h2 class="display">Real work. Real impact. Real evidence.</h2>
+      <p class="body-lg">Behind every one of these numbers is a worker who captured it once — and a leader who used it to make a better decision.</p>
+    </div>
+    <div class="numbers-grid reveal reveal-delay-2">
+      <div class="number-cell">
+        <div class="number-val">3,672</div>
+        <div class="number-desc">Active workers across Australia</div>
+      </div>
+      <div class="number-cell">
+        <div class="number-val">1.2M+</div>
+        <div class="number-desc">Sessions of support recorded</div>
+      </div>
+      <div class="number-cell">
+        <div class="number-val">115K+</div>
+        <div class="number-desc">Surveys & assessments completed</div>
+      </div>
+      <div class="number-cell">
+        <div class="number-val">126K+</div>
+        <div class="number-desc">Reports run by teams</div>
+      </div>
+    </div>
+    <!-- decorative blob -->
+    <svg class="numbers-blob" viewBox="0 0 300 300" fill="none">
+      <ellipse cx="150" cy="150" rx="140" ry="130" fill="white"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="section-label reveal" style="justify-content:center;">Ready to start?</div>
+    <h2 class="display reveal reveal-delay-1">See how CSnet can support your organisation.</h2>
+    <p class="body-lg reveal reveal-delay-2">We walk alongside you from the very first conversation. No obligation early on — just a shared picture of what's possible.</p>
+    <div class="cta-actions reveal reveal-delay-3">
+      <a href="#" class="btn-primary">Talk to us →</a>
+      <a href="#" class="btn-outline">See how it works</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-name">
+        <div class="nav-logo-mark" style="width:30px;height:30px;">
+          <svg viewBox="0 0 40 40" fill="none">
+            <defs>
+              <linearGradient id="footerLogoGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#01924E"/>
+                <stop offset="40%" stop-color="#FFAD2F"/>
+                <stop offset="100%" stop-color="#FB4D86"/>
+              </linearGradient>
+            </defs>
+            <path d="M6 32 C6 32 10 20 18 14 C22 11 26 14 24 20 C22 26 16 24 20 18 C24 12 30 10 34 14" 
+                  stroke="url(#footerLogoGrad)" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        CSnet
+      </div>
+      <p class="footer-tagline">Community service software built for the sector, by people who've worked in it. Know your impact. Tell the story that matters.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Platform</h5>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Data Hub</a></li>
+        <li><a href="#">Security</a></li>
+        <li><a href="#">Implementation</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="#">Our Impact</a></li>
+        <li><a href="#">B Corp</a></li>
+        <li><a href="#">Customers</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Resources</h5>
+      <ul>
+        <li><a href="#">News</a></li>
+        <li><a href="#">Webinars</a></li>
+        <li><a href="#">Impact Report</a></li>
+        <li><a href="#">Support</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Community Services.net Pty Ltd. All rights reserved.</span>
+    <div class="footer-bcorp">
+      <div class="footer-bcorp-icon">B</div>
+      <span>Certified B Corporation — Score 131.1</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Nav shrink on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      nav.style.padding = '14px 48px';
+    } else {
+      nav.style.padding = '20px 48px';
+    }
+  });
+</script>
+</body>
+</html>
