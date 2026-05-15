@@ -779,6 +779,137 @@
     color: white;
   }
 
+  /* ─── CSnet Product Animation ─── */
+  .csnet-product-animation {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(49,45,43,0.15);
+  }
+  .product-screen {
+    background: #1e1c1b;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .product-topbar {
+    background: #2a2826;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .product-topbar-dots { display: flex; gap: 6px; }
+  .product-topbar-dots span {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+  }
+  .product-topbar-title { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.4); }
+  .product-body { display: flex; }
+  .product-sidebar {
+    width: 130px;
+    background: #252321;
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .product-nav-item {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.4);
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .product-nav-item.active {
+    background: rgba(255,173,47,0.15);
+    color: var(--impact-orange);
+  }
+  .product-main { flex: 1; padding: 20px; }
+  .product-metric-row { display: flex; gap: 10px; margin-bottom: 20px; }
+  .product-metric {
+    flex: 1;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    opacity: 0;
+  }
+  .product-metric-val {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .product-metric-key { font-size: 10px; color: rgba(255,255,255,0.4); font-weight: 500; }
+  .product-chart-label { font-size: 11px; color: rgba(255,255,255,0.3); margin-bottom: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+  .product-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 80px;
+    margin-bottom: 16px;
+  }
+  .product-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
+  .product-bar-wrap span { font-size: 9px; color: rgba(255,255,255,0.3); }
+  .product-bar {
+    width: 100%;
+    height: 0;
+    border-radius: 3px 3px 0 0;
+    background: var(--c);
+    transition: height 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    opacity: 0.85;
+  }
+  .product-bars.animated .product-bar { height: var(--h); }
+  .product-entry-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 6px;
+    margin-bottom: 6px;
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  .product-entry-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--driving-magenta);
+    flex-shrink: 0;
+  }
+  .product-entry-line { flex: 1; }
+  .product-entry-name { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.7); margin-bottom: 2px; }
+  .product-entry-tag { font-size: 10px; color: var(--driving-magenta); font-weight: 600; }
+  .product-live-badge {
+    position: absolute;
+    top: 52px; right: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--deep-green);
+    background: rgba(1,146,78,0.12);
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+  }
+
+  /* Keyframe animations for product UI */
+  @keyframes metricFadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+  @keyframes entrySlideIn { from { opacity:0; transform:translateX(-10px); } to { opacity:1; transform:none; } }
+  .anim-1 { animation: metricFadeIn 0.5s 0.8s ease forwards; }
+  .anim-2 { animation: metricFadeIn 0.5s 1.0s ease forwards; }
+  .anim-3 { animation: metricFadeIn 0.5s 1.2s ease forwards; }
+  .anim-4 { animation: entrySlideIn 0.4s 2.2s ease forwards; }
+  .anim-5 { animation: entrySlideIn 0.4s 2.6s ease forwards; }
+  .anim-6 { animation: entrySlideIn 0.4s 3.0s ease forwards; }
+
   /* ─── Animations ─── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
@@ -858,7 +989,7 @@
     <li><a href="#">Our Impact</a></li>
     <li><a href="#">Resources</a></li>
     <li><a href="#">Contact</a></li>
-    <li><a href="#" class="nav-cta">Get started</a></li>
+    <li><a href="#" class="nav-cta">Talk to us</a></li>
   </ul>
 </nav>
 
@@ -892,8 +1023,7 @@
       day-to-day practice with the outcomes they're working towards.
     </p>
     <div class="hero-actions">
-      <a href="#" class="btn-primary">Get started <span class="btn-arrow">→</span></a>
-      <a href="#" class="btn-secondary">See how it works <span class="btn-arrow">→</span></a>
+      <a href="#" class="btn-primary">Talk to us <span class="btn-arrow">→</span></a>
     </div>
   </div>
 
@@ -917,7 +1047,7 @@
       </div>
     </div>
     <div class="hero-trust-badge">
-      <div class="bcorp-badge">B</div>
+      <img src="b_corp_logo.png" alt="Certified B Corporation" style="width:52px; height:52px; object-fit:contain; flex-shrink:0;"/>
       <div class="trust-text">
         <strong>Certified B Corporation since 2015</strong><br>
         B Impact Score of 131.1 — built to serve people, not just profit.
@@ -1009,59 +1139,99 @@
       </div>
     </div>
 
-    <!-- Simple data dashboard illustration -->
-    <div class="data-visual reveal reveal-delay-2">
-      <div class="data-visual-header">
-        <div class="data-visual-title">Program outcomes overview</div>
-        <div class="data-visual-live"><span class="live-dot"></span> Live</div>
-      </div>
-      <div class="data-bars">
-        <div class="bar-group">
-          <div class="bar" style="height:60%; background:linear-gradient(180deg,#FB4D86,#FFAD2F);"></div>
-          <div class="bar-label">Q1</div>
+    <!-- CSnet system animation -->
+    <div class="data-visual reveal reveal-delay-2" style="padding:0; overflow:hidden; background:transparent; border-radius:var(--radius-lg);">
+      <div class="csnet-product-animation">
+        <!-- Animated product UI mockup -->
+        <div class="product-screen">
+          <div class="product-topbar">
+            <div class="product-topbar-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="product-topbar-title">CSnet — Client Overview</div>
+          </div>
+          <div class="product-body">
+            <div class="product-sidebar">
+              <div class="product-nav-item active">📋 Dashboard</div>
+              <div class="product-nav-item">👤 Clients</div>
+              <div class="product-nav-item">📊 Reports</div>
+              <div class="product-nav-item">⚙️ Programs</div>
+            </div>
+            <div class="product-main">
+              <div class="product-metric-row">
+                <div class="product-metric anim-1">
+                  <div class="product-metric-val">94%</div>
+                  <div class="product-metric-key">Outcomes met</div>
+                </div>
+                <div class="product-metric anim-2">
+                  <div class="product-metric-val">↑ 12%</div>
+                  <div class="product-metric-key">YoY improvement</div>
+                </div>
+                <div class="product-metric anim-3">
+                  <div class="product-metric-val">18</div>
+                  <div class="product-metric-key">Active programs</div>
+                </div>
+              </div>
+              <div class="product-chart-label">Program outcomes — last 4 quarters</div>
+              <div class="product-bars">
+                <div class="product-bar-wrap">
+                  <div class="product-bar" style="--h:60%; --c:var(--driving-magenta);"></div>
+                  <span>Q1</span>
+                </div>
+                <div class="product-bar-wrap">
+                  <div class="product-bar" style="--h:75%; --c:var(--driving-magenta);"></div>
+                  <span>Q2</span>
+                </div>
+                <div class="product-bar-wrap">
+                  <div class="product-bar" style="--h:55%; --c:var(--impact-orange);"></div>
+                  <span>Q3</span>
+                </div>
+                <div class="product-bar-wrap">
+                  <div class="product-bar" style="--h:90%; --c:var(--impact-orange);"></div>
+                  <span>Q4</span>
+                </div>
+                <div class="product-bar-wrap">
+                  <div class="product-bar" style="--h:45%; --c:var(--curious-blue);"></div>
+                  <span>Q1</span>
+                </div>
+                <div class="product-bar-wrap">
+                  <div class="product-bar" style="--h:70%; --c:var(--curious-blue);"></div>
+                  <span>Q2</span>
+                </div>
+                <div class="product-bar-wrap">
+                  <div class="product-bar" style="--h:82%; --c:var(--deep-green);"></div>
+                  <span>Q3</span>
+                </div>
+                <div class="product-bar-wrap">
+                  <div class="product-bar" style="--h:95%; --c:var(--deep-green);"></div>
+                  <span>Q4</span>
+                </div>
+              </div>
+              <div class="product-entry-row anim-4">
+                <div class="product-entry-dot"></div>
+                <div class="product-entry-line">
+                  <div class="product-entry-name">Sarah M. — Family Services</div>
+                  <div class="product-entry-tag">Session recorded</div>
+                </div>
+              </div>
+              <div class="product-entry-row anim-5">
+                <div class="product-entry-dot" style="background:var(--curious-blue);"></div>
+                <div class="product-entry-line">
+                  <div class="product-entry-name">Wellbeing assessment — Program A</div>
+                  <div class="product-entry-tag" style="color:var(--curious-blue);">Outcome captured</div>
+                </div>
+              </div>
+              <div class="product-entry-row anim-6">
+                <div class="product-entry-dot" style="background:var(--deep-green);"></div>
+                <div class="product-entry-line">
+                  <div class="product-entry-name">Funder report — DFFH Q4</div>
+                  <div class="product-entry-tag" style="color:var(--deep-green);">Ready to export</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="bar-group">
-          <div class="bar" style="height:75%; background:linear-gradient(180deg,#FB4D86,#FFAD2F);"></div>
-          <div class="bar-label">Q2</div>
-        </div>
-        <div class="bar-group">
-          <div class="bar" style="height:55%; background:linear-gradient(180deg,#FB4D86,#FFAD2F);"></div>
-          <div class="bar-label">Q3</div>
-        </div>
-        <div class="bar-group">
-          <div class="bar" style="height:90%; background:linear-gradient(180deg,#FB4D86,#FFAD2F);"></div>
-          <div class="bar-label">Q4</div>
-        </div>
-        <div class="bar-group">
-          <div class="bar" style="height:45%; background:linear-gradient(180deg,#2A77FF,#01924E);"></div>
-          <div class="bar-label">Q1</div>
-        </div>
-        <div class="bar-group">
-          <div class="bar" style="height:70%; background:linear-gradient(180deg,#2A77FF,#01924E);"></div>
-          <div class="bar-label">Q2</div>
-        </div>
-        <div class="bar-group">
-          <div class="bar" style="height:82%; background:linear-gradient(180deg,#2A77FF,#01924E);"></div>
-          <div class="bar-label">Q3</div>
-        </div>
-        <div class="bar-group">
-          <div class="bar" style="height:95%; background:linear-gradient(180deg,#2A77FF,#01924E);"></div>
-          <div class="bar-label">Q4</div>
-        </div>
-      </div>
-      <div class="data-metric-row">
-        <div class="data-metric">
-          <div class="data-metric-val">94%</div>
-          <div class="data-metric-key">Outcomes met</div>
-        </div>
-        <div class="data-metric">
-          <div class="data-metric-val">↑ 12%</div>
-          <div class="data-metric-key">YoY improvement</div>
-        </div>
-        <div class="data-metric">
-          <div class="data-metric-val">18</div>
-          <div class="data-metric-key">Programs active</div>
-        </div>
+        <div class="product-live-badge"><span class="live-dot"></span> Live system</div>
       </div>
     </div>
   </div>
@@ -1153,39 +1323,6 @@
   </div>
 </section>
 
-<!-- ─── NUMBERS ─── -->
-<section class="numbers-section">
-  <div class="numbers-inner">
-    <div class="numbers-left reveal">
-      <div class="section-label" style="color:white; opacity:0.5;">The difference, in numbers</div>
-      <h2 class="display">Real work. Real impact. Real evidence.</h2>
-      <p class="body-lg">Behind every one of these numbers is a worker who captured it once — and a leader who used it to make a better decision.</p>
-    </div>
-    <div class="numbers-grid reveal reveal-delay-2">
-      <div class="number-cell">
-        <div class="number-val">3,672</div>
-        <div class="number-desc">Active workers across Australia</div>
-      </div>
-      <div class="number-cell">
-        <div class="number-val">1.2M+</div>
-        <div class="number-desc">Sessions of support recorded</div>
-      </div>
-      <div class="number-cell">
-        <div class="number-val">115K+</div>
-        <div class="number-desc">Surveys & assessments completed</div>
-      </div>
-      <div class="number-cell">
-        <div class="number-val">126K+</div>
-        <div class="number-desc">Reports run by teams</div>
-      </div>
-    </div>
-    <!-- decorative blob -->
-    <svg class="numbers-blob" viewBox="0 0 300 300" fill="none">
-      <ellipse cx="150" cy="150" rx="140" ry="130" fill="white"/>
-    </svg>
-  </div>
-</section>
-
 <!-- ─── CTA ─── -->
 <section class="cta-section">
   <div class="cta-inner">
@@ -1272,6 +1409,16 @@
   }, { threshold: 0.12 });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Trigger product bar animation when section scrolls into view
+  const productObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelector('.product-bars')?.classList.add('animated');
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.csnet-product-animation').forEach(el => productObserver.observe(el));
 
   // Nav shrink on scroll
   const nav = document.querySelector('nav');
