@@ -847,6 +847,93 @@
     display: none;
   }
 
+  /* ─── Bus Animation ─── */
+  .bus-animation-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .bus-road {
+    background: #f0ede8;
+    border-radius: var(--radius-md);
+    padding: 32px 24px 20px;
+    position: relative;
+    overflow: hidden;
+    min-height: 140px;
+  }
+  /* Coloured road lines */
+  .road-line {
+    position: absolute;
+    bottom: 28px; left: 0; right: 0;
+    height: 4px;
+    border-radius: 2px;
+  }
+  .road-line.green  { background: #01924E; bottom: 42px; }
+  .road-line.blue   { background: #2A77FF; bottom: 34px; }
+  .road-line.orange { background: #FFAD2F; bottom: 26px; }
+  .road-line.red    { background: #FB4D86; bottom: 18px; }
+
+  /* Theory of Change stops */
+  .toc-stops {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 2;
+  }
+  .toc-stop { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .stop-pin { display: flex; flex-direction: column; align-items: center; }
+  .stop-circle {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--soft-black);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+  }
+  .stop-1 .stop-circle { background: var(--deep-green); }
+  .stop-2 .stop-circle { background: var(--curious-blue); }
+  .stop-3 .stop-circle { background: var(--driving-magenta); }
+  .stop-4 .stop-circle { background: var(--impact-orange); color: var(--soft-black); }
+  .stop-line { width: 2px; height: 20px; background: rgba(49,45,43,0.15); }
+  .stop-label { font-size: 11px; font-weight: 700; color: var(--soft-black); opacity: 0.5; white-space: nowrap; }
+
+  /* The bus */
+  .csnet-bus {
+    position: absolute;
+    bottom: 14px;
+    left: -80px;
+    width: 90px;
+    animation: busRide 6s 0.5s ease-in-out infinite alternate;
+    z-index: 3;
+  }
+  .csnet-bus img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 4px 8px rgba(49,45,43,0.15));
+  }
+  @keyframes busRide {
+    0%   { left: -80px; }
+    100% { left: calc(100% - 100px); }
+  }
+
+  /* Impact report card */
+  .impact-report-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    box-shadow: 0 4px 20px rgba(49,45,43,0.08);
+  }
+
   /* ════════════════════════════════
      CUSTOMERS
   ════════════════════════════════ */
@@ -1071,7 +1158,6 @@
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html" class="active">About</a></li>
-    <li><a href="#">Our Impact</a></li>
     <li><a href="#">Resources</a></li>
     <li><a href="#">Contact</a></li>
     <li><a href="#" class="nav-cta">Get started</a></li>
@@ -1122,13 +1208,6 @@
           </div>
           <div class="founder-years">Co-founder</div>
         </div>
-        <div class="founder-card" style="background:rgba(255,173,47,0.08); border-color:rgba(255,173,47,0.2);">
-          <div style="font-size:22px;">🏆</div>
-          <div class="founder-info">
-            <div class="founder-name" style="font-size:14px;">Certified B Corporation</div>
-            <div class="founder-role">B Impact Score 131.1 · Since 2015</div>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -1136,7 +1215,7 @@
     <div class="hero-stat-strip">
       <div class="hero-stat">
         <div class="hero-stat-val">2011</div>
-        <div class="hero-stat-label">Founded in Melbourne</div>
+        <div class="hero-stat-label">Founded in Australia</div>
       </div>
       <div class="hero-stat">
         <div class="hero-stat-val">15+</div>
@@ -1147,8 +1226,8 @@
         <div class="hero-stat-label">B Corp Impact Score</div>
       </div>
       <div class="hero-stat">
-        <div class="hero-stat-val">2</div>
-        <div class="hero-stat-label">Offices — Melbourne & Brisbane</div>
+        <div class="hero-stat-val">Nationwide</div>
+        <div class="hero-stat-label">Supporting services across Australia</div>
       </div>
     </div>
   </div>
@@ -1161,7 +1240,7 @@
   <div class="story-inner">
     <div class="story-left reveal">
       <div class="section-label">Community Services.net</div>
-      <h2 class="display">We bridge the gap between practice and evidence.</h2>
+      <h2 class="display">CSnet Origin Story</h2>
       <a href="#journey" class="btn-outline" style="margin-top:32px;">Our journey →</a>
     </div>
     <div class="story-body">
@@ -1246,7 +1325,7 @@
       <div class="timeline-content">
         <div class="timeline-tag">Continuing expansion</div>
         <h4>A platform that grows with the sector</h4>
-        <p>CSnet operates from offices in Brisbane and Melbourne, supporting services in communities across Australia. We work closely with partners to improve outcomes and embed evidence-based practice — remaining committed to systemic change through accurate, respectful and real-time information.</p>
+        <p>CSnet supports services in communities across Australia, working closely with partners to improve outcomes and embed evidence-based practice — remaining committed to systemic change through accurate, respectful and real-time information.</p>
       </div>
     </div>
   </div>
@@ -1266,7 +1345,7 @@
     </p>
   </div>
 
-  <div class="team-grid">
+    <div class="team-grid">
     <div class="team-card reveal">
       <div class="team-card-accent"></div>
       <div class="team-card-icon" style="background:rgba(1,146,78,0.1);">🌱</div>
@@ -1295,75 +1374,55 @@
 
     <div class="team-card reveal reveal-delay-2">
       <div class="team-card-accent"></div>
-      <div class="team-card-icon" style="background:rgba(255,173,47,0.1);">🤝</div>
-      <h4>Working together</h4>
-      <p>The practice and technical teams work closely together, maintaining a shared understanding of the human services context. Sector knowledge embedded directly into design, development and evolution.</p>
+      <div class="team-card-icon" style="background:rgba(42,119,255,0.1);">📊</div>
+      <h4>Data & reporting team</h4>
+      <p>Specialist expertise in data quality, reporting frameworks and outcomes measurement. Supporting organisations to extract meaningful insights from their data and meet reporting obligations with confidence.</p>
       <div class="team-card-tags">
-        <span class="tag">Shared context</span>
-        <span class="tag">Evidence-informed</span>
-        <span class="tag">User-centred</span>
-        <span class="tag">Collaborative</span>
+        <span class="tag">Data quality</span>
+        <span class="tag">Reporting frameworks</span>
+        <span class="tag">Outcomes measurement</span>
+        <span class="tag">Power BI</span>
       </div>
     </div>
   </div>
 
-  <!-- Founders -->
-  <div class="founders-row" style="margin-top:20px;">
-    <div class="founder-feature-card reveal">
-      <div class="founder-feature-avatar" style="background: linear-gradient(135deg, var(--deep-green), var(--curious-blue));">MD</div>
-      <div>
-        <div class="founder-feature-name">Mandy Doon</div>
-        <div class="founder-feature-role">Director of Business Development · Co-founder</div>
-        <p class="founder-feature-bio">With more than 30 years of combined involvement in the human services sector, Mandy co-established CSnet in 2007 with the intention of creating a software platform dedicated entirely to the needs of human services organisations. She leads business development and strategic partnerships.</p>
-      </div>
-      <svg class="founder-card-blob" viewBox="0 0 200 200" fill="none">
-        <defs><linearGradient id="fBlob1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#01924E"/><stop offset="100%" stop-color="#2A77FF"/></linearGradient></defs>
-        <ellipse cx="100" cy="100" rx="90" ry="80" fill="url(#fBlob1)"/>
-      </svg>
-    </div>
-
-    <div class="founder-feature-card reveal reveal-delay-1">
-      <div class="founder-feature-avatar" style="background: linear-gradient(135deg, var(--driving-magenta), var(--impact-orange));">TG</div>
-      <div>
-        <div class="founder-feature-name">Tim Gleeson</div>
-        <div class="founder-feature-role">Managing Director · Co-founder</div>
-        <p class="founder-feature-bio">Tim brings more than 30 years of combined involvement in the human services sector. As Managing Director, he leads the strategic direction of CSnet — ensuring the platform continues to evolve alongside the organisations it serves, grounded in practice and driven by evidence.</p>
-      </div>
-      <svg class="founder-card-blob" viewBox="0 0 200 200" fill="none">
-        <defs><linearGradient id="fBlob2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FB4D86"/><stop offset="100%" stop-color="#FFAD2F"/></linearGradient></defs>
-        <ellipse cx="100" cy="100" rx="90" ry="80" fill="url(#fBlob2)"/>
-      </svg>
-    </div>
-  </div>
 </section>
 
 <!-- ════════════════════════════════
      BCORP
 ════════════════════════════════ -->
-<section class="bcorp-section">
-  <div class="bcorp-inner reveal">
-    <div class="bcorp-left">
-      <div class="section-label">B Corp certified</div>
-      <h2 class="display">Proud to be a Certified B Corp.</h2>
-      <p class="body-lg">B Corp certification means we meet the highest standards of social and environmental performance, transparency and accountability. Our score has grown with every recertification — because we keep asking whether the way we operate reflects the values we hold.</p>
+<section class="bcorp-section" style="background: #f4f4f0;">
+  <div class="bcorp-inner reveal" style="background: #1a1a1a; border-radius: var(--radius-lg); padding: 72px 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; overflow: hidden;">
 
-      <div class="bcorp-scores">
+    <!-- B Corp background photo -->
+    <img src="b_corp_photo.jpg" alt="B Corp landscape"
+         style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.2; border-radius:var(--radius-lg);"/>
+
+    <div class="bcorp-left" style="position:relative; z-index:2;">
+      <div class="section-label" style="color:white; opacity:0.5;">
+        <span style="background: white; width:20px; height:2px; border-radius:2px; display:inline-block; margin-right:8px;"></span>
+        B Corp certified
+      </div>
+      <h2 class="display" style="color:white;">Proud to be a Certified B Corp.</h2>
+      <p class="body-lg" style="color:rgba(255,255,255,0.7); margin-top:16px;">B Corp certification means we meet the highest standards of social and environmental performance, transparency and accountability. Our score has grown with every recertification — because we keep asking whether the way we operate reflects the values we hold.</p>
+
+      <div class="bcorp-scores" style="margin-top:32px;">
         <div class="bcorp-score-row">
-          <span class="score-year">2015</span>
+          <span class="score-year" style="color:rgba(255,255,255,0.5);">2015</span>
           <div class="score-bar-track">
             <div class="score-bar-fill" style="width:50.5%;"></div>
           </div>
           <span class="score-val">100.9</span>
         </div>
         <div class="bcorp-score-row">
-          <span class="score-year">2020</span>
+          <span class="score-year" style="color:rgba(255,255,255,0.5);">2020</span>
           <div class="score-bar-track">
             <div class="score-bar-fill" style="width:58.65%;"></div>
           </div>
           <span class="score-val">117.3</span>
         </div>
         <div class="bcorp-score-row">
-          <span class="score-year">2025</span>
+          <span class="score-year" style="color:rgba(255,255,255,0.5);">2025</span>
           <div class="score-bar-track">
             <div class="score-bar-fill" style="width:65.55%;"></div>
           </div>
@@ -1371,7 +1430,7 @@
         </div>
       </div>
 
-      <div class="bcorp-areas">
+      <div class="bcorp-areas" style="margin-top:28px;">
         <div class="bcorp-area-chip">Customers <span class="bcorp-area-score">43.2</span></div>
         <div class="bcorp-area-chip">Workers</div>
         <div class="bcorp-area-chip">Governance</div>
@@ -1379,20 +1438,26 @@
       </div>
     </div>
 
-    <div class="bcorp-badge-block reveal reveal-delay-2">
-      <div class="bcorp-main-badge">
-        <div class="bcorp-score-big">131.1</div>
-        <div class="bcorp-score-label">B Impact Score</div>
+    <!-- Official B Corp logo + score badge -->
+    <div class="bcorp-badge-block reveal reveal-delay-2" style="position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; gap:24px;">
+      <img src="b_corp_logo.png" alt="Certified B Corporation"
+           style="width:140px; height:auto; object-fit:contain; filter:invert(1);"/>
+      <div style="text-align:center;">
+        <div style="font-family:var(--font-display); font-size:64px; font-weight:600; color:white; line-height:1;">131.1</div>
+        <div style="font-size:13px; font-weight:600; color:rgba(255,255,255,0.5); letter-spacing:0.08em; text-transform:uppercase; margin-top:4px;">B Impact Score</div>
       </div>
-      <div class="bcorp-certified-label">
-        <strong>Certified B Corporation</strong>
+      <div style="font-size:13px; font-weight:600; color:rgba(255,255,255,0.5); text-align:center; line-height:1.5;">
+        <strong style="color:white; display:block;">Certified B Corporation</strong>
         Since 2015 · Recertified 2025
       </div>
+      <a href="https://www.bcorporation.net/en-us/find-a-b-corp/company/community-servicesnet-pty-ltd/" target="_blank"
+         style="font-size:13px; font-weight:600; color:rgba(255,255,255,0.6); border:1px solid rgba(255,255,255,0.2); padding:8px 18px; border-radius:var(--radius-full); transition:all 0.2s;"
+         onmouseover="this.style.background='rgba(255,255,255,0.1)'"
+         onmouseout="this.style.background='transparent'">
+        View our B Corp profile →
+      </a>
     </div>
 
-    <svg class="bcorp-blob" viewBox="0 0 300 300" fill="none">
-      <ellipse cx="150" cy="150" rx="140" ry="130" fill="white"/>
-    </svg>
   </div>
 </section>
 
@@ -1416,30 +1481,69 @@
       </div>
     </div>
 
-    <div class="impact-visual reveal reveal-delay-2">
-      <div class="impact-visual-title">Theory of change</div>
-      <div class="toc-flow">
-        <div class="toc-step">
-          <div class="toc-step-num">1</div>
-          <div class="toc-step-label">Inputs</div>
-          <div class="toc-step-text">Sector knowledge, platform configuration, practice expertise</div>
+    <div class="impact-visual reveal reveal-delay-2" style="background:transparent; padding:0; box-shadow:none;">
+
+      <!-- CSnet Impact Bus Animation -->
+      <div class="bus-animation-wrap">
+        <div class="bus-road">
+          <!-- Road lines -->
+          <div class="road-line green"></div>
+          <div class="road-line blue"></div>
+          <div class="road-line orange"></div>
+          <div class="road-line red"></div>
+          <!-- Theory of Change stops -->
+          <div class="toc-stops">
+            <div class="toc-stop stop-1">
+              <div class="stop-pin">
+                <div class="stop-circle">1</div>
+                <div class="stop-line"></div>
+              </div>
+              <div class="stop-label">Inputs</div>
+            </div>
+            <div class="toc-stop stop-2">
+              <div class="stop-pin">
+                <div class="stop-circle">2</div>
+                <div class="stop-line"></div>
+              </div>
+              <div class="stop-label">Activities</div>
+            </div>
+            <div class="toc-stop stop-3">
+              <div class="stop-pin">
+                <div class="stop-circle">3</div>
+                <div class="stop-line"></div>
+              </div>
+              <div class="stop-label">Benefits</div>
+            </div>
+            <div class="toc-stop stop-4">
+              <div class="stop-pin">
+                <div class="stop-circle">4</div>
+                <div class="stop-line"></div>
+              </div>
+              <div class="stop-label">Outcomes</div>
+            </div>
+          </div>
+          <!-- The Bus -->
+          <div class="csnet-bus">
+            <img src="graphic_bus.jpg" alt="CSnet Impact Bus" />
+          </div>
         </div>
-        <div class="toc-step">
-          <div class="toc-step-num">2</div>
-          <div class="toc-step-label">Activities</div>
-          <div class="toc-step-text">Data capture, outcome measurement, reporting, team support</div>
-        </div>
-        <div class="toc-step">
-          <div class="toc-step-num">3</div>
-          <div class="toc-step-label">Benefits</div>
-          <div class="toc-step-text">Clearer evidence, better decisions, reduced admin burden</div>
-        </div>
-        <div class="toc-step">
-          <div class="toc-step-num">4</div>
-          <div class="toc-step-label">Outcomes</div>
-          <div class="toc-step-text">Improved client outcomes, stronger sector evidence base</div>
+
+        <!-- Impact Report card below -->
+        <div class="impact-report-card">
+          <img src="impact_report.jpg" alt="CSnet Impact Report 2025"
+               style="width:120px; height:auto; border-radius:var(--radius-sm); flex-shrink:0; object-fit:cover;"/>
+          <div>
+            <div style="font-size:12px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; opacity:0.4; margin-bottom:6px;">New report</div>
+            <div style="font-size:16px; font-weight:700; color:var(--soft-black); margin-bottom:6px; line-height:1.2;">CSnet Impact Report 2025</div>
+            <div style="font-size:13px; opacity:0.6; margin-bottom:12px; line-height:1.5;">Five years of learning and reflection — documenting the journey from inputs to real-world outcomes.</div>
+            <a href="https://lnkd.in/gYrM-79m" target="_blank"
+               style="font-size:13px; font-weight:700; color:var(--driving-magenta); display:inline-flex; align-items:center; gap:6px;">
+              Read the full report →
+            </a>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
