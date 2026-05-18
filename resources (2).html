@@ -154,6 +154,32 @@
   }
   .btn-outline:hover { background: var(--soft-black); color: var(--white); border-color: var(--soft-black); }
 
+
+  /* ─── Acknowledgement of Country ─── */
+  .acknowledgement {
+    background: var(--soft-black);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 0 48px;
+  }
+  .acknowledgement-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 28px 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .acknowledgement-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .acknowledgement-inner p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.45);
+    font-style: italic;
+  }
+
   /* ─── Scroll reveal ─── */
   .reveal {
     opacity: 0;
@@ -799,6 +825,7 @@
     .ownership-badge { min-width: auto; }
     .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
     .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .acknowledgement { padding: 0 24px; }
   }
 </style>
 </head>
@@ -1360,6 +1387,14 @@
     <div class="footer-bcorp">
       <div class="footer-bcorp-icon">B</div>
       <span>Certified B Corporation — Score 131.1</span>
+    </div>
+  </div>
+
+  <!-- Acknowledgement of Country -->
+  <div class="acknowledgement">
+    <div class="acknowledgement-inner">
+      <div class="acknowledgement-icon">🌿</div>
+      <p>CSnet acknowledges the Traditional Custodians of the lands on which we work and live, and pays respect to Elders past, present and emerging. We recognise the strength, resilience and ongoing connection of Aboriginal and Torres Strait Islander peoples to Country, culture and community. We are committed to walking alongside First Nations organisations and communities in the pursuit of self-determination and better outcomes for all.</p>
     </div>
   </div>
 </footer>
