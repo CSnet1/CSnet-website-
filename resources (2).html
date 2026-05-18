@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources — CSnet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75,600&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --impact-orange: #FFAD2F;
+    --canvas-cream: #F7F2EE;
+    --accent-pink: #FFA1F7;
+    --driving-magenta: #FB4D86;
+    --creative-lavender: #A864FC;
+    --deep-green: #01924E;
+    --curious-blue: #2A77FF;
+    --soft-black: #312D2B;
+    --white: #ffffff;
+    --font-display: 'Bricolage Grotesque', sans-serif;
+    --font-body: 'Public Sans', sans-serif;
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 32px;
+    --radius-full: 999px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--canvas-cream);
+    color: var(--soft-black);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { text-decoration: none; color: inherit; }
+
+  /* ─── Nav ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(247,242,238,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(49,45,43,0.08);
+    transition: padding 0.3s ease;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--soft-black);
+    letter-spacing: -0.01em;
+  }
+  .nav-logo-mark { width: 36px; height: 36px; flex-shrink: 0; }
+  .nav-logo-mark svg { width: 100%; height: 100%; }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--soft-black);
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav-links a.active { opacity: 1; font-weight: 600; }
+  .nav-cta {
+    background: var(--soft-black);
+    color: var(--white) !important;
+    opacity: 1 !important;
+    padding: 10px 22px;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 15px;
+    transition: background 0.2s, transform 0.15s !important;
+  }
+  .nav-cta:hover { background: var(--driving-magenta) !important; transform: translateY(-1px); }
+
+  /* ─── Shared ─── */
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--soft-black);
+    opacity: 0.45;
+    margin-bottom: 20px;
+  }
+  .section-label::before {
+    content: '';
+    width: 20px; height: 2px;
+    background: var(--driving-magenta);
+    border-radius: 2px;
+  }
+  h1.display, h2.display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    color: var(--soft-black);
+  }
+  h1.display { font-size: clamp(48px, 6vw, 84px); margin-bottom: 24px; }
+  h2.display { font-size: clamp(32px, 4vw, 56px); margin-bottom: 20px; }
+  .body-lg {
+    font-size: 18px;
+    line-height: 1.65;
+    font-weight: 400;
+    opacity: 0.7;
+  }
+  .btn-primary {
+    background: var(--soft-black);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: var(--radius-full);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--driving-magenta); transform: translateY(-2px); }
+  .btn-outline {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--soft-black);
+    border: 2px solid rgba(49,45,43,0.25);
+    padding: 13px 26px;
+    border-radius: var(--radius-full);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .btn-outline:hover { background: var(--soft-black); color: var(--white); border-color: var(--soft-black); }
+
+  /* ─── Scroll reveal ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ════════════════════════════════
+     HERO
+  ════════════════════════════════ */
+  .security-hero {
+    min-height: 68vh;
+    padding: 140px 48px 80px;
+    background: var(--soft-black);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+  }
+  .hero-ribbon {
+    position: absolute;
+    right: -80px; top: -60px;
+    width: 620px; height: 620px;
+    z-index: 1;
+    opacity: 0.55;
+    animation: ribbonFloat 9s ease-in-out infinite;
+  }
+  @keyframes ribbonFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50%       { transform: translateY(-16px) rotate(2deg); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: flex-end;
+    width: 100%;
+  }
+  .hero-left { opacity: 0; animation: fadeUp 0.8s 0.1s ease forwards; }
+  .hero-left .section-label { color: white; opacity: 0.4; }
+  .hero-left .section-label::before { background: var(--impact-orange); }
+  .hero-left h1.display { color: var(--white); }
+  .hero-left h1.display span {
+    background: linear-gradient(135deg, var(--deep-green), var(--curious-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-left .body-lg { color: rgba(255,255,255,0.6); max-width: 480px; }
+
+  /* Trust pillars in hero right */
+  .hero-trust-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    opacity: 0;
+    animation: fadeIn 1s 0.5s ease forwards;
+  }
+  .trust-pill {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius-md);
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: background 0.2s;
+  }
+  .trust-pill:hover { background: rgba(255,255,255,0.1); }
+  .trust-pill-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .trust-pill h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.2;
+  }
+  .trust-pill p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  /* Stat strip */
+  .hero-stat-strip {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: 56px;
+    padding-top: 40px;
+    width: 100%;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s ease forwards;
+  }
+  .hero-stat {
+    flex: 1;
+    padding-right: 40px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    margin-right: 40px;
+  }
+  .hero-stat:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+  .hero-stat-val {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .hero-stat-label { font-size: 13px; color: rgba(255,255,255,0.4); font-weight: 500; line-height: 1.4; }
+
+  /* ════════════════════════════════
+     INTRO BANNER
+  ════════════════════════════════ */
+  .intro-banner {
+    padding: 0 48px;
+    background: var(--canvas-cream);
+    margin-top: -1px;
+  }
+  .intro-banner-inner {
+    background: linear-gradient(135deg, var(--deep-green) 0%, var(--curious-blue) 60%, var(--creative-lavender) 100%);
+    border-radius: var(--radius-lg);
+    padding: 56px 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 48px;
+    position: relative;
+    overflow: hidden;
+    margin-top: -40px;
+  }
+  .intro-point {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .intro-point-icon {
+    font-size: 28px;
+    margin-bottom: 4px;
+  }
+  .intro-point h4 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.1;
+  }
+  .intro-point p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.6);
+  }
+  .intro-divider {
+    width: 1px;
+    background: rgba(255,255,255,0.15);
+    align-self: stretch;
+    display: none;
+  }
+
+  /* ════════════════════════════════
+     FAQ SECTION
+  ════════════════════════════════ */
+  .faq-section {
+    padding: 100px 48px;
+    background: var(--canvas-cream);
+  }
+  .faq-inner {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  /* Sticky sidebar */
+  .faq-sidebar {
+    position: sticky;
+    top: 100px;
+  }
+  .faq-sidebar .section-label { margin-bottom: 28px; }
+  .faq-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .faq-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--soft-black);
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 0.2s, background 0.2s;
+    border: none;
+    background: none;
+    text-align: left;
+    width: 100%;
+  }
+  .faq-nav-item:hover { opacity: 0.8; background: rgba(49,45,43,0.05); }
+  .faq-nav-item.active { opacity: 1; font-weight: 600; background: var(--white); }
+  .faq-nav-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* FAQ accordion */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .faq-item {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .faq-item:hover { box-shadow: 0 4px 24px rgba(49,45,43,0.08); }
+  .faq-item.open { box-shadow: 0 4px 24px rgba(49,45,43,0.1); }
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 28px 32px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .faq-question-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .faq-q-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .faq-q-text {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--soft-black);
+    line-height: 1.3;
+  }
+  .faq-chevron {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--canvas-cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.3s ease, background 0.2s;
+    font-size: 14px;
+  }
+  .faq-item.open .faq-chevron {
+    transform: rotate(180deg);
+    background: var(--soft-black);
+    color: white;
+  }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+  }
+  .faq-item.open .faq-answer {
+    max-height: 600px;
+  }
+  .faq-answer-inner {
+    padding: 0 32px 32px 88px;
+  }
+  .faq-answer-inner p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--soft-black);
+    opacity: 0.7;
+    margin-bottom: 14px;
+  }
+  .faq-answer-inner p:last-child { margin-bottom: 0; }
+  .faq-answer-inner strong { font-weight: 600; opacity: 1; color: var(--soft-black); }
+
+  /* Answer list */
+  .faq-list-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .faq-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--soft-black);
+    opacity: 0.7;
+  }
+  .faq-list-bullet {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+
+  /* Answer highlight box */
+  .faq-highlight {
+    background: var(--canvas-cream);
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    margin-top: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .faq-highlight-icon { font-size: 18px; flex-shrink: 0; }
+  .faq-highlight p {
+    font-size: 13px !important;
+    font-weight: 600;
+    opacity: 0.7 !important;
+    margin-bottom: 0 !important;
+    line-height: 1.5 !important;
+  }
+
+  /* ════════════════════════════════
+     SECURITY STACK SECTION
+  ════════════════════════════════ */
+  .stack-section {
+    padding: 0 48px 100px;
+    background: var(--canvas-cream);
+  }
+  .stack-inner {
+    background: var(--soft-black);
+    border-radius: var(--radius-lg);
+    padding: 72px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stack-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+    margin-bottom: 56px;
+  }
+  .stack-header .section-label { color: white; opacity: 0.35; }
+  .stack-header .section-label::before { background: var(--impact-orange); }
+  .stack-header h2.display { color: var(--white); }
+  .stack-header .body-lg { color: rgba(255,255,255,0.6); }
+
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .stack-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-md);
+    padding: 28px 24px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .stack-card:hover { background: rgba(255,255,255,0.09); transform: translateY(-3px); }
+  .stack-card-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+  .stack-card h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .stack-card p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.45);
+  }
+  .stack-card-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: var(--radius-full);
+    margin-top: 12px;
+  }
+
+  /* Stack blob */
+  .stack-blob {
+    position: absolute;
+    right: -120px; bottom: -80px;
+    width: 400px; height: 400px;
+    opacity: 0.06;
+    pointer-events: none;
+  }
+
+  /* ════════════════════════════════
+     COMPLIANCE SECTION
+  ════════════════════════════════ */
+  .compliance-section {
+    padding: 100px 48px;
+    background: var(--canvas-cream);
+  }
+  .compliance-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .compliance-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .compliance-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.2s;
+  }
+  .compliance-card:hover { transform: translateX(6px); }
+  .compliance-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .compliance-card h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--soft-black);
+    margin-bottom: 4px;
+  }
+  .compliance-card p {
+    font-size: 13px;
+    line-height: 1.55;
+    opacity: 0.55;
+  }
+  .compliance-tick {
+    margin-left: auto;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--deep-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  /* ════════════════════════════════
+     DATA OWNERSHIP CALLOUT
+  ════════════════════════════════ */
+  .ownership-section {
+    padding: 0 48px 100px;
+    background: var(--canvas-cream);
+  }
+  .ownership-inner {
+    background: linear-gradient(135deg, var(--impact-orange) 0%, var(--driving-magenta) 60%, var(--creative-lavender) 100%);
+    border-radius: var(--radius-lg);
+    padding: 72px 64px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .ownership-left .section-label { color: white; opacity: 0.5; }
+  .ownership-left .section-label::before { background: white; }
+  .ownership-left h2.display { color: var(--white); }
+  .ownership-left .body-lg { color: rgba(255,255,255,0.75); margin-top: 16px; max-width: 480px; }
+  .ownership-badge {
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.25);
+    border-radius: var(--radius-md);
+    padding: 36px 32px;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    flex-shrink: 0;
+    min-width: 220px;
+  }
+  .ownership-badge-icon { font-size: 48px; margin-bottom: 16px; }
+  .ownership-badge h4 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 8px;
+    line-height: 1.1;
+  }
+  .ownership-badge p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.5;
+  }
+  .ownership-blob {
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 350px; height: 350px;
+    opacity: 0.1;
+    pointer-events: none;
+  }
+
+  /* ════════════════════════════════
+     CTA
+  ════════════════════════════════ */
+  .cta-section {
+    padding: 100px 48px;
+    background: var(--canvas-cream);
+    text-align: center;
+  }
+  .cta-inner { max-width: 640px; margin: 0 auto; }
+  .cta-section h2.display { text-align: center; margin-bottom: 20px; }
+  .cta-section .body-lg { text-align: center; margin: 0 auto 40px; }
+  .cta-actions { display: flex; align-items: center; justify-content: center; gap: 16px; }
+
+  /* ════════════════════════════════
+     FOOTER
+  ════════════════════════════════ */
+  footer {
+    background: var(--soft-black);
+    color: var(--white);
+    padding: 60px 48px 36px;
+  }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+  .footer-brand-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+    color: var(--white);
+  }
+  .footer-tagline { font-size: 14px; line-height: 1.6; opacity: 0.5; max-width: 260px; }
+  .footer-col h5 {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.4;
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-col ul li a { font-size: 14px; opacity: 0.6; transition: opacity 0.2s; font-weight: 500; }
+  .footer-col ul li a:hover { opacity: 1; }
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 36px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 13px;
+    opacity: 0.4;
+  }
+  .footer-bcorp { display: flex; align-items: center; gap: 10px; }
+  .footer-bcorp-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 10px;
+    color: white;
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    .nav-links { display: none; }
+    .security-hero { padding: 120px 24px 60px; min-height: auto; }
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    .hero-trust-grid { grid-template-columns: 1fr 1fr; }
+    .hero-stat-strip { flex-wrap: wrap; gap: 24px; }
+    .hero-stat { border-right: none; margin-right: 0; padding-right: 0; flex: 0 0 calc(50% - 12px); }
+    .intro-banner, .stack-section, .ownership-section { padding-left: 24px; padding-right: 24px; }
+    .intro-banner-inner { grid-template-columns: 1fr; padding: 40px 32px; gap: 32px; }
+    .faq-section, .compliance-section, .cta-section { padding: 60px 24px; }
+    .faq-inner { grid-template-columns: 1fr; }
+    .faq-sidebar { position: static; }
+    .faq-nav { flex-direction: row; flex-wrap: wrap; }
+    .faq-answer-inner { padding: 0 24px 24px 24px; }
+    .stack-inner { padding: 48px 32px; }
+    .stack-header { grid-template-columns: 1fr; gap: 24px; }
+    .stack-grid { grid-template-columns: 1fr 1fr; }
+    .compliance-inner { grid-template-columns: 1fr; gap: 40px; }
+    .ownership-inner { grid-template-columns: 1fr; padding: 48px 32px; gap: 36px; }
+    .ownership-badge { min-width: auto; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="logoGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#01924E"/>
+            <stop offset="40%" stop-color="#FFAD2F"/>
+            <stop offset="100%" stop-color="#FB4D86"/>
+          </linearGradient>
+        </defs>
+        <path d="M6 32 C6 32 10 20 18 14 C22 11 26 14 24 20 C22 26 16 24 20 18 C24 12 30 10 34 14"
+              stroke="url(#logoGrad)" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+      </svg>
+    </div>
+    CSnet
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="resources.html" class="active">Resources</a></li>
+    <li><a href="#">Contact</a></li>
+    <li><a href="#" class="nav-cta">Talk to us</a></li>
+  </ul>
+</nav>
+
+<!-- ════════════════════════════════
+     HERO
+════════════════════════════════ -->
+<section class="security-hero">
+  <!-- Gradient ribbon -->
+  <svg class="hero-ribbon" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="ribbonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#01924E"/>
+        <stop offset="35%" stop-color="#2A77FF"/>
+        <stop offset="65%" stop-color="#A864FC"/>
+        <stop offset="100%" stop-color="#FB4D86"/>
+      </linearGradient>
+    </defs>
+    <path d="M500 80 C540 60 570 110 550 160 C530 210 470 200 440 250 C410 300 430 360 390 400 C350 440 290 420 250 460 C210 500 220 560 170 575 C120 590 70 555 60 510 C50 465 80 420 110 390 C140 360 175 355 190 310 C205 265 185 205 215 170 C245 135 295 155 340 130 C385 105 420 80 500 80Z"
+          fill="url(#ribbonGrad)" opacity="0.5"/>
+  </svg>
+
+  <div style="width:100%;">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="section-label">Security & data</div>
+        <h1 class="display">Your data is <span>safe with us.</span></h1>
+        <p class="body-lg">CSnet® is purpose-built to support community service organisations with secure, reliable access to their data — while meeting Australian privacy obligations and contractual standards.</p>
+      </div>
+      <div class="hero-trust-grid">
+        <div class="trust-pill">
+          <div class="trust-pill-icon" style="background:rgba(1,146,78,0.2);">🇦🇺</div>
+          <h4>Hosted in Australia</h4>
+          <p>AWS Asia Pacific (Sydney) — data never leaves Australian soil</p>
+        </div>
+        <div class="trust-pill">
+          <div class="trust-pill-icon" style="background:rgba(42,119,255,0.2);">🔒</div>
+          <h4>Encrypted at rest</h4>
+          <p>All databases, documents and backups encrypted</p>
+        </div>
+        <div class="trust-pill">
+          <div class="trust-pill-icon" style="background:rgba(251,77,134,0.2);">⏱️</div>
+          <h4>Backed up every 5 mins</h4>
+          <p>Point-in-time recovery within minutes if required</p>
+        </div>
+        <div class="trust-pill">
+          <div class="trust-pill-icon" style="background:rgba(255,173,47,0.2);">🏛️</div>
+          <h4>Privacy Act compliant</h4>
+          <p>Privacy Act 1988, APPs and NDB Scheme</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-stat-strip">
+      <div class="hero-stat">
+        <div class="hero-stat-val">AWS Sydney</div>
+        <div class="hero-stat-label">Australian data hosting</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">5 min</div>
+        <div class="hero-stat-label">Backup frequency</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">MFA</div>
+        <div class="hero-stat-label">Multi-factor authentication</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">Annual</div>
+        <div class="hero-stat-label">Disaster recovery rehearsals</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     INTRO BANNER
+════════════════════════════════ -->
+<div class="intro-banner">
+  <div class="intro-banner-inner reveal">
+    <div class="intro-point">
+      <div class="intro-point-icon">🛡️</div>
+      <h4>Privacy-first by design</h4>
+      <p>Security and privacy are built into the architecture of CSnet — not bolted on afterwards. Every decision starts with protecting your data.</p>
+    </div>
+    <div class="intro-point">
+      <div class="intro-point-icon">🤝</div>
+      <h4>Partnership, not just compliance</h4>
+      <p>We work alongside your organisation to meet shared legal obligations. Data governance is a conversation, not a checkbox.</p>
+    </div>
+    <div class="intro-point">
+      <div class="intro-point-icon">🔍</div>
+      <h4>Transparent and accountable</h4>
+      <p>Regular independent testing, real-time monitoring, and clear communication when things change. No surprises.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     FAQ
+════════════════════════════════ -->
+<section class="faq-section">
+  <div class="faq-inner">
+
+    <!-- Sidebar nav -->
+    <div class="faq-sidebar reveal">
+      <div class="section-label">Jump to</div>
+      <nav class="faq-nav" aria-label="FAQ navigation">
+        <button class="faq-nav-item active" onclick="scrollToFaq('ownership')">
+          <span class="faq-nav-dot" style="background:var(--deep-green);"></span>
+          Data ownership
+        </button>
+        <button class="faq-nav-item" onclick="scrollToFaq('hosting')">
+          <span class="faq-nav-dot" style="background:var(--curious-blue);"></span>
+          Where data is hosted
+        </button>
+        <button class="faq-nav-item" onclick="scrollToFaq('privacy')">
+          <span class="faq-nav-dot" style="background:var(--driving-magenta);"></span>
+          Privacy laws
+        </button>
+        <button class="faq-nav-item" onclick="scrollToFaq('protection')">
+          <span class="faq-nav-dot" style="background:var(--impact-orange);"></span>
+          Data protection
+        </button>
+        <button class="faq-nav-item" onclick="scrollToFaq('encryption')">
+          <span class="faq-nav-dot" style="background:var(--creative-lavender);"></span>
+          Encryption
+        </button>
+        <button class="faq-nav-item" onclick="scrollToFaq('backups')">
+          <span class="faq-nav-dot" style="background:var(--deep-green);"></span>
+          Backups
+        </button>
+        <button class="faq-nav-item" onclick="scrollToFaq('disaster')">
+          <span class="faq-nav-dot" style="background:var(--curious-blue);"></span>
+          Outages & recovery
+        </button>
+      </nav>
+    </div>
+
+    <!-- FAQ accordion -->
+    <div class="faq-list">
+
+      <div class="faq-item open reveal" id="faq-ownership" data-key="ownership">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <div class="faq-question-left">
+            <div class="faq-q-icon" style="background:rgba(1,146,78,0.1);">🏢</div>
+            <div class="faq-q-text">Who owns the data stored in CSnet®?</div>
+          </div>
+          <div class="faq-chevron">▾</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>All data entered into CSnet systems <strong>remains the property of your organisation.</strong> Full stop.</p>
+            <p>CSnet® does not claim ownership of client or organisational data and only uses it to deliver and support the CSnet® service in accordance with our licence agreement.</p>
+            <div class="faq-highlight">
+              <div class="faq-highlight-icon">✅</div>
+              <p>Your data belongs to you — always. CSnet is the custodian, not the owner.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-1" id="faq-hosting" data-key="hosting">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <div class="faq-question-left">
+            <div class="faq-q-icon" style="background:rgba(42,119,255,0.1);">🇦🇺</div>
+            <div class="faq-q-text">Where is CSnet® data hosted?</div>
+          </div>
+          <div class="faq-chevron">▾</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>All CSnet® customer data is hosted and stored <strong>entirely within Australia.</strong></p>
+            <p>The platform is hosted on Amazon Web Services (AWS) in the Asia Pacific (Sydney) region, using multiple availability zones for resilience and protection against localised outages.</p>
+            <div class="faq-highlight">
+              <div class="faq-highlight-icon">📍</div>
+              <p>AWS Asia Pacific (Sydney) — multiple availability zones for maximum resilience.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-1" id="faq-privacy" data-key="privacy">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <div class="faq-question-left">
+            <div class="faq-q-icon" style="background:rgba(251,77,134,0.1);">⚖️</div>
+            <div class="faq-q-text">Does CSnet® comply with Australian privacy laws?</div>
+          </div>
+          <div class="faq-chevron">▾</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Yes. CSnet® is an Australian company and complies with:</p>
+            <div class="faq-list-items">
+              <div class="faq-list-item">
+                <span class="faq-list-bullet" style="background:var(--driving-magenta);"></span>
+                The Privacy Act 1988 and Australian Privacy Principles (APPs)
+              </div>
+              <div class="faq-list-item">
+                <span class="faq-list-bullet" style="background:var(--driving-magenta);"></span>
+                The Notifiable Data Breaches (NDB) Scheme
+              </div>
+              <div class="faq-list-item">
+                <span class="faq-list-bullet" style="background:var(--driving-magenta);"></span>
+                Relevant state-based privacy and information protection laws
+              </div>
+            </div>
+            <p style="margin-top:16px;">CSnet works in partnership with organisations to meet these shared legal obligations.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-2" id="faq-protection" data-key="protection">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <div class="faq-question-left">
+            <div class="faq-q-icon" style="background:rgba(255,173,47,0.1);">🛡️</div>
+            <div class="faq-q-text">How is our data protected?</div>
+          </div>
+          <div class="faq-chevron">▾</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>CSnet® uses multiple layers of security controls, including:</p>
+            <div class="faq-list-items">
+              <div class="faq-list-item">
+                <span class="faq-list-bullet" style="background:var(--impact-orange);"></span>
+                Encryption of all data at rest
+              </div>
+              <div class="faq-list-item">
+                <span class="faq-list-bullet" style="background:var(--impact-orange);"></span>
+                Strict access controls with identity management and multi-factor authentication
+              </div>
+              <div class="faq-list-item">
+                <span class="faq-list-bullet" style="background:var(--impact-orange);"></span>
+                Real-time monitoring of the hosting environment
+              </div>
+              <div class="faq-list-item">
+                <span class="faq-list-bullet" style="background:var(--impact-orange);"></span>
+                Regular security reviews and independent testing
+              </div>
+            </div>
+            <p style="margin-top:16px;">Security protections are applied across infrastructure, systems, and processes.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-2" id="faq-encryption" data-key="encryption">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <div class="faq-question-left">
+            <div class="faq-q-icon" style="background:rgba(168,100,252,0.1);">🔐</div>
+            <div class="faq-q-text">Is our data encrypted?</div>
+          </div>
+          <div class="faq-chevron">▾</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Yes. All customer data in CSnet® is <strong>encrypted at rest</strong>, including:</p>
+            <div class="faq-list-items">
+              <div class="faq-list-item">
+                <span class="faq-list-bullet" style="background:var(--creative-lavender);"></span>
+                Databases
+              </div>
+              <div class="faq-list-item">
+                <span class="faq-list-bullet" style="background:var(--creative-lavender);"></span>
+                Documents
+              </div>
+              <div class="faq-list-item">
+                <span class="faq-list-bullet" style="background:var(--creative-lavender);"></span>
+                System backups
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-3" id="faq-backups" data-key="backups">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <div class="faq-question-left">
+            <div class="faq-q-icon" style="background:rgba(1,146,78,0.1);">💾</div>
+            <div class="faq-q-text">How often is data backed up?</div>
+          </div>
+          <div class="faq-chevron">▾</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Each CSnet® organisation database is backed up <strong>every five minutes</strong>, allowing point-in-time recovery within minutes if required.</p>
+            <div class="faq-highlight">
+              <div class="faq-highlight-icon">⏱️</div>
+              <p>5-minute backup intervals mean your data is never more than minutes away from full recovery.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal reveal-delay-3" id="faq-disaster" data-key="disaster">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <div class="faq-question-left">
+            <div class="faq-q-icon" style="background:rgba(42,119,255,0.1);">🔄</div>
+            <div class="faq-q-text">What happens if there is a system outage or disaster?</div>
+          </div>
+          <div class="faq-chevron">▾</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>CSnet® has documented and tested business continuity and disaster recovery processes in place. If a serious system failure occurs:</p>
+            <div class="faq-list-items">
+              <div class="faq-list-item">
+                <span class="faq-list-bullet" style="background:var(--curious-blue);"></span>
+                Services can be restored in alternate Australian availability zones
+              </div>
+              <div class="faq-list-item">
+                <span class="faq-list-bullet" style="background:var(--curious-blue);"></span>
+                Customer data can be recovered to within minutes of the last backup
+              </div>
+              <div class="faq-list-item">
+                <span class="faq-list-bullet" style="background:var(--curious-blue);"></span>
+                Full disaster recovery rehearsals are conducted annually to validate these processes
+              </div>
+            </div>
+            <p style="margin-top:16px;">Customers are kept informed in line with CSnet® communication procedures and service commitments.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     SECURITY STACK
+════════════════════════════════ -->
+<section class="stack-section">
+  <div class="stack-inner">
+    <div class="stack-header">
+      <div>
+        <div class="section-label reveal">How we protect you</div>
+        <h2 class="display reveal reveal-delay-1">Multiple layers of security — not just one.</h2>
+      </div>
+      <p class="body-lg reveal reveal-delay-2" style="color:rgba(255,255,255,0.6);">
+        Security at CSnet isn't a single feature — it's a layered approach across infrastructure, access, monitoring and governance.
+      </p>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-card reveal">
+        <div class="stack-card-icon" style="background:rgba(1,146,78,0.2);">🔒</div>
+        <h4>Encryption at rest</h4>
+        <p>All databases, documents and backups are encrypted. Your data is unreadable without proper authorisation.</p>
+        <span class="stack-card-badge" style="background:rgba(1,146,78,0.2); color:#4ade80;">Active</span>
+      </div>
+      <div class="stack-card reveal reveal-delay-1">
+        <div class="stack-card-icon" style="background:rgba(42,119,255,0.2);">👤</div>
+        <h4>Identity & access</h4>
+        <p>Strict user roles, permissions and multi-factor authentication ensure only authorised people access your data.</p>
+        <span class="stack-card-badge" style="background:rgba(42,119,255,0.2); color:#93c5fd;">MFA Enabled</span>
+      </div>
+      <div class="stack-card reveal reveal-delay-2">
+        <div class="stack-card-icon" style="background:rgba(251,77,134,0.2);">📡</div>
+        <h4>Real-time monitoring</h4>
+        <p>The hosting environment is monitored continuously. Threats and anomalies are detected and responded to as they happen.</p>
+        <span class="stack-card-badge" style="background:rgba(251,77,134,0.2); color:#fda4af;">24/7</span>
+      </div>
+      <div class="stack-card reveal reveal-delay-3">
+        <div class="stack-card-icon" style="background:rgba(255,173,47,0.2);">🧪</div>
+        <h4>Independent testing</h4>
+        <p>Regular security reviews and independent testing validate our protections. Annual disaster recovery rehearsals test our response.</p>
+        <span class="stack-card-badge" style="background:rgba(255,173,47,0.2); color:var(--impact-orange);">Annual</span>
+      </div>
+    </div>
+    <svg class="stack-blob" viewBox="0 0 300 300" fill="none">
+      <defs>
+        <linearGradient id="stackBlob" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#2A77FF"/>
+          <stop offset="100%" stop-color="#A864FC"/>
+        </linearGradient>
+      </defs>
+      <ellipse cx="150" cy="150" rx="140" ry="130" fill="url(#stackBlob)"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     COMPLIANCE
+════════════════════════════════ -->
+<section class="compliance-section">
+  <div class="compliance-inner">
+    <div>
+      <div class="section-label reveal">Compliance</div>
+      <h2 class="display reveal reveal-delay-1">Built to meet Australian standards.</h2>
+      <p class="body-lg reveal reveal-delay-2" style="margin-top:16px;">
+        CSnet is an Australian company. Our data practices are built around Australian law — not adapted from overseas frameworks.
+      </p>
+      <p class="body-lg reveal reveal-delay-3" style="margin-top:14px;">
+        We work in partnership with your organisation to meet shared legal obligations, not just our own.
+      </p>
+    </div>
+    <div class="compliance-cards reveal reveal-delay-2">
+      <div class="compliance-card">
+        <div class="compliance-icon" style="background:rgba(1,146,78,0.1);">📜</div>
+        <div>
+          <h4>Privacy Act 1988</h4>
+          <p>Australian Privacy Principles (APPs) fully applied</p>
+        </div>
+        <div class="compliance-tick">✓</div>
+      </div>
+      <div class="compliance-card">
+        <div class="compliance-icon" style="background:rgba(42,119,255,0.1);">🔔</div>
+        <div>
+          <h4>Notifiable Data Breaches</h4>
+          <p>NDB Scheme compliance — you're informed if it matters</p>
+        </div>
+        <div class="compliance-tick">✓</div>
+      </div>
+      <div class="compliance-card">
+        <div class="compliance-icon" style="background:rgba(251,77,134,0.1);">🏛️</div>
+        <div>
+          <h4>State-based laws</h4>
+          <p>Relevant state privacy and information protection legislation</p>
+        </div>
+        <div class="compliance-tick">✓</div>
+      </div>
+      <div class="compliance-card">
+        <div class="compliance-icon" style="background:rgba(255,173,47,0.1);">🤝</div>
+        <div>
+          <h4>Shared obligations</h4>
+          <p>We partner with you — compliance is a joint responsibility</p>
+        </div>
+        <div class="compliance-tick">✓</div>
+      </div>
+      <div class="compliance-card">
+        <div class="compliance-icon" style="background:rgba(168,100,252,0.1);">🌏</div>
+        <div>
+          <h4>Data sovereignty</h4>
+          <p>All data stays in Australia — AWS Sydney region only</p>
+        </div>
+        <div class="compliance-tick">✓</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     DATA OWNERSHIP CALLOUT
+════════════════════════════════ -->
+<section class="ownership-section">
+  <div class="ownership-inner reveal">
+    <div class="ownership-left">
+      <div class="section-label">Your data, your organisation</div>
+      <h2 class="display">You own your data. We just look after it.</h2>
+      <p class="body-lg">CSnet® does not claim ownership of client or organisational data. We only use it to deliver and support the CSnet® service — in accordance with your licence agreement, and nothing more.</p>
+    </div>
+    <div class="ownership-badge">
+      <div class="ownership-badge-icon">🔑</div>
+      <h4>100% data ownership retained by your organisation</h4>
+      <p>Governed by your licence agreement. Always.</p>
+    </div>
+    <svg class="ownership-blob" viewBox="0 0 300 300" fill="none">
+      <ellipse cx="150" cy="150" rx="140" ry="130" fill="white"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     CTA
+════════════════════════════════ -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="section-label reveal" style="justify-content:center;">Still have questions?</div>
+    <h2 class="display reveal reveal-delay-1">We're happy to walk you through it.</h2>
+    <p class="body-lg reveal reveal-delay-2">Security questions matter. We're available to talk through data governance, privacy obligations or any specific requirements your organisation has.</p>
+    <div class="cta-actions reveal reveal-delay-3">
+      <a href="#" class="btn-primary">Contact our team →</a>
+      <a href="#" class="btn-outline">View full privacy policy</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-name">
+        <div class="nav-logo-mark" style="width:30px;height:30px;">
+          <svg viewBox="0 0 40 40" fill="none">
+            <defs>
+              <linearGradient id="footerLogoGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#01924E"/>
+                <stop offset="40%" stop-color="#FFAD2F"/>
+                <stop offset="100%" stop-color="#FB4D86"/>
+              </linearGradient>
+            </defs>
+            <path d="M6 32 C6 32 10 20 18 14 C22 11 26 14 24 20 C22 26 16 24 20 18 C24 12 30 10 34 14"
+                  stroke="url(#footerLogoGrad)" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        CSnet
+      </div>
+      <p class="footer-tagline">Community service software built for the sector, by people who've worked in it. Know your impact. Tell the story that matters.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Platform</h5>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Data Hub</a></li>
+        <li><a href="resources.html">Security</a></li>
+        <li><a href="#">Implementation</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="#">Our Impact</a></li>
+        <li><a href="#">B Corp</a></li>
+        <li><a href="#">Customers</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Resources</h5>
+      <ul>
+        <li><a href="#">News</a></li>
+        <li><a href="#">Webinars</a></li>
+        <li><a href="#">Impact Report</a></li>
+        <li><a href="#">Support</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Community Services.net Pty Ltd. All rights reserved.</span>
+    <div class="footer-bcorp">
+      <div class="footer-bcorp-icon">B</div>
+      <span>Certified B Corporation — Score 131.1</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Nav shrink
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.padding = window.scrollY > 40 ? '14px 48px' : '20px 48px';
+  });
+
+  // FAQ accordion toggle
+  function toggleFaq(questionEl) {
+    const item = questionEl.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    // Open clicked if it was closed
+    if (!isOpen) item.classList.add('open');
+    // Update sidebar active state
+    updateSidebarActive();
+  }
+
+  // Scroll to FAQ item
+  function scrollToFaq(key) {
+    const el = document.getElementById(`faq-${key}`);
+    if (!el) return;
+    // Close all, open target
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    el.classList.add('open');
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    updateSidebarActive();
+  }
+
+  // Update sidebar active item based on open FAQ
+  function updateSidebarActive() {
+    const openItem = document.querySelector('.faq-item.open');
+    document.querySelectorAll('.faq-nav-item').forEach(btn => btn.classList.remove('active'));
+    if (openItem) {
+      const key = openItem.dataset.key;
+      const btn = document.querySelector(`.faq-nav-item[onclick="scrollToFaq('${key}')"]`);
+      if (btn) btn.classList.add('active');
+    }
+  }
+</script>
+</body>
+</html>
