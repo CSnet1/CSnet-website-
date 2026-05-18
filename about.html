@@ -172,6 +172,32 @@
   }
   .btn-outline:hover { background: var(--soft-black); color: var(--white); border-color: var(--soft-black); }
 
+
+  /* ─── Acknowledgement of Country ─── */
+  .acknowledgement {
+    background: var(--soft-black);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 0 48px;
+  }
+  .acknowledgement-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 28px 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .acknowledgement-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .acknowledgement-inner p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.45);
+    font-style: italic;
+  }
+
   /* ─── Scroll reveal ─── */
   .reveal {
     opacity: 0;
@@ -1129,6 +1155,7 @@
     .case-study-card { grid-template-columns: 1fr; padding: 36px 28px; gap: 36px; }
     .footer-inner { grid-template-columns: 1fr 1fr; }
     .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .acknowledgement { padding: 0 24px; }
     .numbers-inner { grid-template-columns: 1fr; }
     .timeline::before { left: 90px; }
     .timeline-item { grid-template-columns: 90px 40px 1fr; }
@@ -1158,9 +1185,9 @@
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html" class="active">About</a></li>
-    <li><a href="#">Resources</a></li>
+    <li><a href="resources.html">Resources</a></li>
     <li><a href="#">Contact</a></li>
-    <li><a href="#" class="nav-cta">Get started</a></li>
+    <li><a href="#" class="nav-cta">Talk to us</a></li>
   </ul>
 </nav>
 
@@ -1192,22 +1219,6 @@
         <p class="body-lg">CSnet was created in 2011 by people who saw first-hand the gap between everyday practice and the evidence organisations were expected to produce. Fifteen years on, that belief still drives everything we do.</p>
       </div>
       <div class="hero-founder-cards">
-        <div class="founder-card">
-          <div class="founder-avatar" style="background: linear-gradient(135deg, var(--deep-green), var(--curious-blue));">MD</div>
-          <div class="founder-info">
-            <div class="founder-name">Mandy Doon</div>
-            <div class="founder-role">Director of Business Development</div>
-          </div>
-          <div class="founder-years">Co-founder</div>
-        </div>
-        <div class="founder-card">
-          <div class="founder-avatar" style="background: linear-gradient(135deg, var(--driving-magenta), var(--impact-orange));">TG</div>
-          <div class="founder-info">
-            <div class="founder-name">Tim Gleeson</div>
-            <div class="founder-role">Managing Director</div>
-          </div>
-          <div class="founder-years">Co-founder</div>
-        </div>
       </div>
     </div>
 
@@ -1679,6 +1690,14 @@
     <div class="footer-bcorp">
       <div class="footer-bcorp-icon">B</div>
       <span>Certified B Corporation — Score 131.1</span>
+    </div>
+  </div>
+
+  <!-- Acknowledgement of Country -->
+  <div class="acknowledgement">
+    <div class="acknowledgement-inner">
+      <div class="acknowledgement-icon">🌿</div>
+      <p>CSnet acknowledges the Traditional Custodians of the lands on which we work and live, and pays respect to Elders past, present and emerging. We recognise the strength, resilience and ongoing connection of Aboriginal and Torres Strait Islander peoples to Country, culture and community. We are committed to walking alongside First Nations organisations and communities in the pursuit of self-determination and better outcomes for all.</p>
     </div>
   </div>
 </footer>
