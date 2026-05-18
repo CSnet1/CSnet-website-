@@ -929,6 +929,32 @@
   }
   .hero-blob { animation: ribbonFloat 8s ease-in-out infinite; }
 
+
+  /* ─── Acknowledgement of Country ─── */
+  .acknowledgement {
+    background: var(--soft-black);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 0 48px;
+  }
+  .acknowledgement-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 28px 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .acknowledgement-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .acknowledgement-inner p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.45);
+    font-style: italic;
+  }
+
   /* ─── Scroll reveal ─── */
   .reveal {
     opacity: 0;
@@ -957,6 +983,7 @@
     .who-uses-grid { grid-template-columns: 1fr; }
     .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
     .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .acknowledgement { padding: 0 24px; }
     .config-cards { grid-template-columns: 1fr; }
     .config-card.wide { grid-column: span 1; }
   }
@@ -986,8 +1013,7 @@
   <ul class="nav-links">
     <li><a href="index.html" class="active">Home</a></li>
     <li><a href="about.html">About</a></li>
-    <li><a href="#">Our Impact</a></li>
-    <li><a href="#">Resources</a></li>
+    <li><a href="resources.html">Resources</a></li>
     <li><a href="#">Contact</a></li>
     <li><a href="#" class="nav-cta">Talk to us</a></li>
   </ul>
@@ -1016,7 +1042,7 @@
       <span class="hero-eyebrow-dot"></span>
       Community service software
     </div>
-    <h1>Know your <span>impact.</span> Tell the story that matters.</h1>
+    <h1>Know your <span>impact.</span></h1>
     <p class="hero-sub">
       CSnet is case management software built for the community service sector — 
       <strong>by people who've worked in it.</strong> We help organisations connect 
@@ -1258,28 +1284,23 @@
       <div class="config-card" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);">
         <div class="config-card-accent" style="background:rgba(255,173,47,0.2);">🏗️</div>
         <h4 style="color:white;">Program structure</h4>
-        <p style="color:rgba(255,255,255,0.5);">Configure programs, activity types and outcome frameworks to match your model.</p>
-      </div>
-      <div class="config-card" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);">
-        <div class="config-card-accent" style="background:rgba(251,77,134,0.2);">📋</div>
-        <h4 style="color:white;">Reporting frameworks</h4>
-        <p style="color:rgba(255,255,255,0.5);">Meet funder, government and governance requirements without extra work.</p>
+        <p style="color:rgba(255,255,255,0.5);">Configure programs, activity types and outcome frameworks to match your model — not the other way around.</p>
       </div>
       <div class="config-card" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);">
         <div class="config-card-accent" style="background:rgba(42,119,255,0.2);">🔗</div>
-        <h4 style="color:white;">System integration</h4>
-        <p style="color:rgba(255,255,255,0.5);">Connect with IRIS, DFFH and other external systems through built-in integrations.</p>
+        <h4 style="color:white;">IRIS integration</h4>
+        <p style="color:rgba(255,255,255,0.5);">Enter information once and have it automatically validated and prepared for IRIS reporting — reducing duplication and manual handling entirely.</p>
       </div>
       <div class="config-card" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);">
-        <div class="config-card-accent" style="background:rgba(1,146,78,0.2);">🛡️</div>
-        <h4 style="color:white;">Security & access</h4>
-        <p style="color:rgba(255,255,255,0.5);">User roles, permissions and data governance that reflect your organisation's needs.</p>
+        <div class="config-card-accent" style="background:rgba(1,146,78,0.2);">📤</div>
+        <h4 style="color:white;">DSS DEX integration</h4>
+        <p style="color:rgba(255,255,255,0.5);">Capture data as you go and submit error-free information directly to DEX in near real time. No last-minute reporting pressure, no build-up of errors.</p>
       </div>
       <div class="config-card wide" style="background:rgba(255,173,47,0.1); border:1px solid rgba(255,173,47,0.2);">
         <div class="config-card-accent" style="background:rgba(255,173,47,0.2); margin-bottom:0;">✨</div>
         <div>
           <h4 style="color:white;">Data Hub & Power BI</h4>
-          <p style="color:rgba(255,255,255,0.5);">For organisations ready to go deeper — connect to a Power BI semantic model and build custom analytics on your own CSnet data.</p>
+          <p style="color:rgba(255,255,255,0.5);">Securely access a Power BI semantic model built on your CSnet data — refreshed daily, hosted securely, giving your team the independence to build reporting that reflects how your organisation works.</p>
         </div>
       </div>
     </div>
@@ -1356,7 +1377,7 @@
         </div>
         CSnet
       </div>
-      <p class="footer-tagline">Community service software built for the sector, by people who've worked in it. Know your impact. Tell the story that matters.</p>
+      <p class="footer-tagline">Community service software built for the sector, by people who've worked in it. Know your impact.</p>
     </div>
     <div class="footer-col">
       <h5>Platform</h5>
@@ -1364,7 +1385,7 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="#">Features</a></li>
         <li><a href="#">Data Hub</a></li>
-        <li><a href="#">Security</a></li>
+        <li><a href="resources.html">Security</a></li>
         <li><a href="#">Implementation</a></li>
       </ul>
     </div>
@@ -1394,6 +1415,14 @@
     <div class="footer-bcorp">
       <div class="footer-bcorp-icon">B</div>
       <span>Certified B Corporation — Score 131.1</span>
+    </div>
+  </div>
+
+  <!-- Acknowledgement of Country -->
+  <div class="acknowledgement">
+    <div class="acknowledgement-inner">
+      <div class="acknowledgement-icon">🌿</div>
+      <p>CSnet acknowledges the Traditional Custodians of the lands on which we work and live, and pays respect to Elders past, present and emerging. We recognise the strength, resilience and ongoing connection of Aboriginal and Torres Strait Islander peoples to Country, culture and community. We are committed to walking alongside First Nations organisations and communities in the pursuit of self-determination and better outcomes for all.</p>
     </div>
   </div>
 </footer>
